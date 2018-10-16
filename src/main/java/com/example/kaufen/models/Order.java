@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Order implements Serializable{
@@ -24,6 +25,9 @@ public class Order implements Serializable{
 	@JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
 	inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
 	private List<Product> products;
+	@ManyToOne
+	@JoinColumn(name = "client_order_id")
+	private Client client;
 
 	public List<Product> getProducts() {
 		return products;

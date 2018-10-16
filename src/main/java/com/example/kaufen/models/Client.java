@@ -1,11 +1,15 @@
 package com.example.kaufen.models;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Client implements Serializable{
@@ -19,6 +23,8 @@ public class Client implements Serializable{
 	private String lastname;
 	private Long CPF;
 	private String birthdate;
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	private List<Order> orders;
 	
 	public Long getId() {
 		return id;
