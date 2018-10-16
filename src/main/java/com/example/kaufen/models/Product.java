@@ -1,11 +1,13 @@
 package com.example.kaufen.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Product implements Serializable{
@@ -17,6 +19,8 @@ public class Product implements Serializable{
 	private Long id;
 	private String name;
 	private Float price_cents;
+	@ManyToMany(mappedBy = "products")
+	private List<Order> orders;
 	
 	public String getName() {
 		return name;
