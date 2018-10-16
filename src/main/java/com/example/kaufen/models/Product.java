@@ -3,6 +3,7 @@ package com.example.kaufen.models;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,15 +20,9 @@ public class Product implements Serializable{
 	private Long id;
 	private String name;
 	private Float price_cents;
-	@ManyToMany(mappedBy = "products")
-	private List<Order> orders;
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<OrderList> order_lists;
 	
-	public List<Order> getOrders() {
-		return orders;
-	}
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
 	public String getName() {
 		return name;
 	}
@@ -46,7 +41,5 @@ public class Product implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
 	
 }

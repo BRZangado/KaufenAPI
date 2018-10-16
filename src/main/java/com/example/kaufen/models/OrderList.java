@@ -14,27 +14,25 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Order implements Serializable{
+public class OrderList implements Serializable{
 	
 	private static final long serialVersionUID = 3088509324181490599L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
-	inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
-	private List<Product> products;
 	@ManyToOne
 	@JoinColumn(name = "client_order_id")
 	private Client client;
+	@ManyToMany(mappedBy = "order_lists")
+	private List<Product> products;
 
-	public List<Product> getProducts() {
-		return products;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	public Long getId() {

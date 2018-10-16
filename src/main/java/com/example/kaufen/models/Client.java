@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,11 +20,32 @@ public class Client implements Serializable{
 	private Long id;
 	private String name;
 	private String lastname;
-	private Long CPF;
+	private Long cpf;
 	private String birthdate;
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-	private List<Order> orders;
+	private List<OrderList> orders_list;
 	
+	public Client(String name, String lastname, Long cpf, String bithdate) {
+		this.setName(name);
+		this.setLastname(lastname);
+		this.setBirthdate(bithdate);
+		this.setCpf(cpf);
+	}
+	
+	public Client(){}
+	
+	public Long getCpf() {
+		return cpf;
+	}
+	public void setCpf(Long cpf) {
+		this.cpf = cpf;
+	}
+	public List<OrderList> getOrders_list() {
+		return orders_list;
+	}
+	public void setOrders_list(List<OrderList> orders_list) {
+		this.orders_list = orders_list;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -43,12 +63,6 @@ public class Client implements Serializable{
 	}
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
-	}
-	public Long getCPF() {
-		return CPF;
-	}
-	public void setCPF(Long cPF) {
-		CPF = cPF;
 	}
 	public String getBirthdate() {
 		return birthdate;
