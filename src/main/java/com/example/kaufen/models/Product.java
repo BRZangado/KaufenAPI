@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Product implements Serializable{
@@ -20,6 +22,9 @@ public class Product implements Serializable{
 	private Long id;
 	private String name;
 	private Float price_cents;
+	@ManyToOne
+	@JoinColumn(name = "product_store_id")
+	private Store store;
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<OrderList> order_lists;
 	
