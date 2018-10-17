@@ -20,12 +20,12 @@ public class Client implements Serializable{
 	private Long id;
 	private String name;
 	private String lastname;
-	private Long cpf;
+	private String cpf;
 	private String birthdate;
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	private List<OrderList> orders_list;
 	
-	public Client(String name, String lastname, Long cpf, String bithdate) {
+	public Client(String name, String lastname, String cpf, String bithdate) {
 		this.setName(name);
 		this.setLastname(lastname);
 		this.setBirthdate(bithdate);
@@ -34,10 +34,10 @@ public class Client implements Serializable{
 	
 	public Client(){}
 	
-	public Long getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
-	public void setCpf(Long cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 	public List<OrderList> getOrders_list() {
