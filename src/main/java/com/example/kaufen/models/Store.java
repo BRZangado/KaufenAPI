@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,8 +21,15 @@ public class Store implements Serializable{
 	private Long id;
 	private String name;
 	private String category;
-	@OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "store", cascade = CascadeType.ALL)
 	private List<Product> products;
+	
+	public Store(String name, String category) {
+		this.name = name;
+		this.category = category;
+	}
+	
+	public Store() {}
 	
 	public Long getId() {
 		return id;
@@ -46,6 +54,9 @@ public class Store implements Serializable{
 	}
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+	public void addProduct(Product product) {
+		this.products.add(product);
 	}
 
 }

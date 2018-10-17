@@ -5,12 +5,16 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class Product implements Serializable{
@@ -21,23 +25,42 @@ public class Product implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String name;
-	private Float price_cents;
+	private int price_cents;
 	@ManyToOne
-	@JoinColumn(name = "product_store_id")
+	@JoinColumn(name="store_id")
 	private Store store;
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<OrderList> order_lists;
 	
+	public Product(String name, int price_cents) {
+		this.name = name;
+		this.price_cents = price_cents;
+	}
+	
+	public Product() {}
+	
+	public Long getStore() {
+		return store.getId();
+	}
+	public void setStore(Store store) {
+		this.store = store;
+	}
+	public List<OrderList> getOrder_lists() {
+		return order_lists;
+	}
+	public void setOrder_lists(List<OrderList> order_lists) {
+		this.order_lists = order_lists;
+	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Float getPrice_cents() {
+	public int getPrice_cents() {
 		return price_cents;
 	}
-	public void setPrice_cents(Float price_cents) {
+	public void setPrice_cents(int price_cents) {
 		this.price_cents = price_cents;
 	}
 	public Long getId() {
