@@ -26,6 +26,23 @@ public class OrderList implements Serializable{
 	private Client client;
 	@ManyToMany(mappedBy = "order_lists")
 	private List<Product> products;
+	private Boolean status;
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 
 	public Client getClient() {
 		return client;
