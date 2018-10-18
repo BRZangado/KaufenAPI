@@ -1,6 +1,7 @@
 package com.example.kaufen.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,6 +28,7 @@ public class Store implements Serializable{
 	public Store(String name, String category) {
 		this.name = name;
 		this.category = category;
+		this.products = new ArrayList<Product>();
 	}
 	
 	public Store() {}

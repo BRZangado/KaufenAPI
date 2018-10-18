@@ -1,7 +1,10 @@
 package com.example.kaufen.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,11 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class Product implements Serializable{
@@ -29,12 +30,13 @@ public class Product implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="store_id")
 	private Store store;
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<OrderList> order_lists;
+	@ManyToMany(mappedBy = "products")
+	private Set<OrderList> order_lists = new HashSet<>();
 	
-	public Product(String name, int price_cents) {
+	public Product(String name, int price_cents, Store store) {
 		this.name = name;
 		this.price_cents = price_cents;
+		this.store = store;
 	}
 	
 	public Product() {}
@@ -45,11 +47,16 @@ public class Product implements Serializable{
 	public void setStore(Store store) {
 		this.store = store;
 	}
-	public List<OrderList> getOrder_lists() {
+	public Set<OrderList> getOrder_lists() {
 		return order_lists;
 	}
-	public void setOrder_lists(List<OrderList> order_lists) {
+
+	public void setOrder_lists(Set<OrderList> order_lists) {
 		this.order_lists = order_lists;
+	}
+
+	public void addOrderList(OrderList order) {
+		this.order_lists.add(order);
 	}
 	public String getName() {
 		return name;

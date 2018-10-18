@@ -1,6 +1,7 @@
 package com.example.kaufen.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -30,6 +31,7 @@ public class Client implements Serializable{
 		this.setLastname(lastname);
 		this.setBirthdate(bithdate);
 		this.setCpf(cpf);
+		this.orders_list = new ArrayList<OrderList>();
 	}
 	
 	public Client(){}
@@ -45,6 +47,9 @@ public class Client implements Serializable{
 	}
 	public void setOrders_list(List<OrderList> orders_list) {
 		this.orders_list = orders_list;
+	}
+	public void add_OrderList(OrderList list) {
+		this.orders_list.add(list);
 	}
 	public Long getId() {
 		return id;

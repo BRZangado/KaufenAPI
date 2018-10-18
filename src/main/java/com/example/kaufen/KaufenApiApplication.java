@@ -1,5 +1,6 @@
 package com.example.kaufen;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.example.kaufen.models.Client;
+import com.example.kaufen.models.OrderList;
 import com.example.kaufen.models.Product;
 import com.example.kaufen.models.Store;
 import com.example.kaufen.repository.ClientRepository;
@@ -42,17 +44,20 @@ public class KaufenApiApplication {
 	    	Store store = new Store("Carrefour", "Supermarket");
 	    	sr.save(store);
 	    	
-	    	Product p1 = new Product("Item1", 199);
-	    	p1.setStore(store);
+	    	Product p1 = new Product("Item1", 199, store);
 	    	pr.save(p1);
 	    	
-	    	Product p2 = new Product("Item2", 199);
-	    	p2.setStore(store);
+	    	Product p2 = new Product("Item2", 199, store);
 	    	pr.save(p2);
 	    	
-	    	Product p3 = new Product("Item3", 199);
-	    	p3.setStore(store);
+	    	Product p3 = new Product("Item3", 199, store);
 	    	pr.save(p3);
+	    	
+	    	OrderList list = new OrderList(client, "Waiting");
+	    	list.addProduct(p1);
+	    	list.addProduct(p2);
+	    	list.addProduct(p3);
+	    	or.save(list);
 	        
 	      };
 	}
